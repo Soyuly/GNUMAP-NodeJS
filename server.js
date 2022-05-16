@@ -2,6 +2,7 @@
 const { render } = require('ejs');
 const express = require('express');
 const app = express();
+const db = require("./db/index.js");
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -25,6 +26,11 @@ app.engine('html', require('ejs').renderFile);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req,res)=>{
+     db.connection.query( `SELECT * FROM users`, (err, results)=>{
+        if(err)
+          console.log(err);
+        console.log(results);
+    });
     return res.render('main.html', {title : 'hi'})
 });
 
