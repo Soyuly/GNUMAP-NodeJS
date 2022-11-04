@@ -22,5 +22,7 @@ module.exports = function () {
 
   require("../src/app/Convenient/convenientRoute")(app);
 
+  require("../src/app/Revise/reviseRoute")(app);
+
   return app;
 };

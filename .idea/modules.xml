@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/api-server-node-js-master.iml" filepath="$PROJECT_DIR$/.idea/api-server-node-js-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GNUMAP-NodeJS.iml" filepath="$PROJECT_DIR$/.idea/GNUMAP-NodeJS.iml" />
     </modules>
   </component>
 </project>
