@@ -1,0 +1,50 @@
+const jwtMiddleware = require("../../../config/jwtMiddleware");
+const buildingProvider = require("./buildingProvider");
+
+const baseResponse = require("../../../config/baseResponseStatus");
+const { response, errResponse } = require("../../../config/response");
+
+const regexEmail = require("regex-email");
+const { emit } = require("nodemon");
+const { pool } = require("../../../config/database");
+const { addDistanceAndTime } = require("../../../config/directions");
+
+/**
+ * API No. 0
+ * API Name : building 경로 (소요 시간, 소요 거리) API
+ * [POST] /v1/building
+ */
+
+exports.searchBuilding = async function (req, res) {
+  const { curLat, curLng } = req.params;
+  let { keyword } = req.params;
+  const regexInt = /[^0-9]/g; // [숫자 추출] 정규 표현식
+  const regexEmpty = /^\s+|\s+$/gm; // [공백 제거] 정규 표현식
+  const num = keyword.replace(regexInt, "");
+  keyword = keyword.replace(regexEmpty, "");
+
+  // 건물 번호나 동을 포함한 검색어를 입력하였을 경우,
+  if (num == keyword || keyword.includes("동")) {
+    keyword = parseInt(num);
+  }
+
+  // 건물 명으로 입력
+  if (typeof keyword == "string") {
+    const buildingResult = await buildingProvider.retrieveBuildingByNameOrNum(
+      keyword,
+      curLat,
+      curLng
+    );
+    return res.send(buildingResult);
+  }
+
+  // 건물 번호로 입력
+  else {
+    const buildingResult = await buildingProvider.retrieveBuildingByNameOrNum(
+      keyword,
+      curLat,
+      curLng
+    );
+    return res.send(buildingResult);
+  }
+};
