@@ -48,3 +48,18 @@ exports.searchBuilding = async function (req, res) {
     return res.send(buildingResult);
   }
 };
+
+exports.showBuildingPath = async (req, res) => {
+  const { curLat, curLng, destLat, destLng } = req.params;
+  data = {
+    curLat: curLat,
+    curLng: curLng,
+    destLat: destLat,
+    destLng: destLng,
+  };
+  return res.render("path.html", data);
+};
+
+exports.showGnuMap = async (req, res) => {
+  return res.render("gnumap.html");
+};
