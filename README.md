@@ -1,55 +1,25 @@
-## DataSystem Project
-### 배달의 민족앱의 몇가지 기능을 API 구현
+# GNUMAP 백엔드 1차 리팩토링
 
-### Folder Structure
-- `src`: 메인 로직 
-- `config` 및 `util` 폴더: 메인 로직은 아니지만 `src` 에서 필요한 부차적인 파일들을 모아놓은 폴더
-- 도메인 폴더 구조
-> Route - Controller - Provider/Service - DAO
+## ✅ 개발 스택
 
-- Route: Request에서 보낸 라우팅 처리
-- Controller: Request를 처리하고 Response 해주는 곳. (Provider/Service에 넘겨주고 다시 받아온 결과값을 형식화), 형식적 Validation
-- Provider/Service: 비즈니스 로직 처리, 의미적 Validation
-- DAO: Data Access Object의 줄임말. Query가 작성되어 있는 곳. 
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 
-### User
-- userController.js
-- userDao.js
-- userProvider.js
-- userRoute.js
-- userService.js
+## ✅ API 명세
 
-### Store
-- storeController.js
-- storeDao.js
-- storeProvider.js
-- storeRoute.js
-- storeService.js
+## ✅ 명령어
 
-### Review
-- reviewController.js
-- reviewDao.js
-- reviewProvider.js
-- reviewRoute.js
-- reviewService.js
+서버 실행
 
-### Menu
-- menuController.js
-- menuDao.js
-- menuProvider.js
-- menuRoute.js
-- menuService.js
+```
+docker-compose up
+```
 
-### Category
-- categoryController.js
-- categoryDao.js
-- categoryProvider.js
-- categoryRoute.js
-- categoryService.js
+파일 수정 후 리빌드
 
-### Basket
-- BasketController.js
-- BasketDao.js
-- BasketProvider.js
-- BasketRoute.js
-- BasketService.js
+```
+docker-compose up --build
+```
+
+## 📆 1차 리팩토링 결과
+
+추가예정
