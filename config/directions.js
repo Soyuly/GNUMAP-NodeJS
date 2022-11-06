@@ -49,12 +49,12 @@ function getDistanceAndTime(lat1, lng1, lat2, lng2) {
   distance = distance * 60 * 1.1515 * 1.609344 * 1000;
 
   // / 1000 => km 로 변환
-  if (distance < 100) distance = (Math.round(distance / 10) * 10) / 1000;
-  else distance = (Math.round(distance / 100) * 100) / 1000;
+  if (distance < 100) distance = Math.round(distance / 10) * 10;
+  else distance = Math.round(distance / 100) * 100;
 
   // 보행자 평균 속도: 4.644 km/h -> time이 너무 적게 나와서 수정 (4.644 km/h -> 3.644 km/h)
   // 분 단위로 시간 변환 ( * 60 )
-  const time = Math.round((distance / 3.644) * 60);
+  const time = Math.round((distance / 1000 / 3.644) * 60);
   return { distance: distance, time: time };
 }
 
