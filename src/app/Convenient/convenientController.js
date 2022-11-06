@@ -26,14 +26,14 @@ exports.getConvenientDirection = async function (req, res) {
 };
 
 exports.findConvenient = async function (req, res) {
-  const {curLat, curLng, destLat, destLng} = req.params;
+  const { curLat, curLng, destLat, destLng } = req.params;
   console.log(`find 2도착: ${curLat} ${curLng} ${destLat} ${destLng}`);
 
   return res.render("pathInfo.html", {
     lat: curLat,
     lng: curLng,
     tlat: destLat,
-    tlng: destLng
+    tlng: destLng,
   });
 };
 
