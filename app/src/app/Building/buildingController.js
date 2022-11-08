@@ -52,6 +52,12 @@ exports.searchBuilding = async function (req, res) {
   }
 };
 
+/**
+ * API No. 1
+ * API Name : building 경로 화면 표시 API
+ * [POST] /v1/building
+ */
+
 exports.showBuildingPath = async (req, res) => {
   const { curLat, curLng, destLat, destLng } = req.params;
   data = {
