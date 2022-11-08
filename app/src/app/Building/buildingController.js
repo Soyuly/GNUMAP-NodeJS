@@ -7,7 +7,10 @@ const { response, errResponse } = require("../../../config/response");
 const regexEmail = require("regex-email");
 const { emit } = require("nodemon");
 const { pool } = require("../../../config/database");
-const { addDistanceAndTime } = require("../../../config/directions");
+const {
+  addDistanceAndTime,
+  getDistanceAndTime,
+} = require("../../../config/directions");
 
 /**
  * API No. 0
@@ -57,6 +60,17 @@ exports.showBuildingPath = async (req, res) => {
     destLat: destLat,
     destLng: destLng,
   };
+  const { distance, time } = getDistanceAndTime(
+    curLat,
+    curLng,
+    destLat,
+    destLng
+  );
+
+  if (time > 40) {
+    return res.render("long_path.html", { lat: destLat, lng: destLng });
+  }
+
   return res.render("path.html", data);
 };
 
