@@ -6,6 +6,8 @@
 /env
 .idea
 .vscode
+./app/logs
+./app/log
 
 # Coveralls
 .nyc_output
