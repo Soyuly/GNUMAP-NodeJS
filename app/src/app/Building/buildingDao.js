@@ -13,7 +13,7 @@ async function selectBuildingByName(connection, name) {
   const selectBuildingByNameQuery = `
     SELECT *
     FROM building
-    WHERE ( name LIKE ? OR college LIKE ? );
+    WHERE ( name LIKE ? OR category LIKE ? );
     `;
   const [buildingRows] = await connection.query(selectBuildingByNameQuery, [
     query,
