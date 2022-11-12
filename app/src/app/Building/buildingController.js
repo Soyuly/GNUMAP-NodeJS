@@ -73,7 +73,7 @@ exports.showBuildingPath = async (req, res) => {
     destLng
   );
 
-  if (time > 40) {
+  if (time > 90 && distance > 5000) {
     return res.render("long_path.html", { lat: destLat, lng: destLng });
   }
 
