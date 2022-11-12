@@ -19,5 +19,6 @@ services:
       - /app/node_modules
     env_file:
       - ./env/db.env
+      - ./env/slack.env
 volumes:
   logs:

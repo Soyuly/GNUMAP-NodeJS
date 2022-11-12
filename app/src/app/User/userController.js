@@ -2,10 +2,10 @@ const jwtMiddleware = require("../../../config/jwtMiddleware");
 const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
 const baseResponse = require("../../../config/baseResponseStatus");
-const {response, errResponse} = require("../../../config/response");
+const { response, errResponse } = require("../../../config/response");
 
 const regexEmail = require("regex-email");
-const {emit} = require("nodemon");
+const { emit } = require("nodemon");
 
 /**
  * API No. 0
@@ -13,7 +13,7 @@ const {emit} = require("nodemon");
  * [GET] /app/test
  */
 // exports.getTest = async function (req, res) {
-//      return res.send(response(baseResponse.SUCCESS));
+//  return res.send(response(baseResponse.SUCCESS));
 // };
 
 /**
@@ -22,35 +22,32 @@ const {emit} = require("nodemon");
  * [POST] /app/users
  */
 exports.postUsers = async function (req, res) {
+  /**
+   * Body: userEmail, userPassword, userName
+   */
+  const { userEmail, userPassword, userName, userPhoneNumber } = req.body;
 
-    /**
-     * Body: userEmail, userPassword, userName
-     */
-    const {userEmail, userPassword, userName, userPhoneNumber} = req.body;
+  // 빈 값 체크
+  if (!userEmail) return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
 
-    // 빈 값 체크
-    if (!userEmail)
-        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+  // 길이 체크
+  if (userEmail.length > 30)
+    return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
 
-    // 길이 체크
-    if (userEmail.length > 30)
-        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+  // 형식 체크 (by 정규표현식)
+  if (!regexEmail.test(userEmail))
+    return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
 
-    // 형식 체크 (by 정규표현식)
-    if (!regexEmail.test(userEmail))
-        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+  // 기타 등등 - 추가하기
 
-    // 기타 등등 - 추가하기
+  const signUpResponse = await userService.createUser(
+    userEmail,
+    userPassword,
+    userName,
+    userPhoneNumber
+  );
 
-
-    const signUpResponse = await userService.createUser(
-        userEmail,
-        userPassword,
-        userName,
-        userPhoneNumber,
-    );
-
-    return res.send(signUpResponse);
+  return res.send(signUpResponse);
 };
 
 /**
@@ -59,20 +56,19 @@ exports.postUsers = async function (req, res) {
  * [GET] /app/users
  */
 exports.getUsers = async function (req, res) {
+  const userEmail = req.query.userEmail;
 
-    const userEmail = req.query.userEmail;
-
-    if (!userEmail) {
-        // 유저 전체 조회
-        const userListResult = await userProvider.retrieveUserList();
-        // return res.send(response(baseResponse.SUCCESS, userListResult));
-        return res.send(userListResult);
-    } else {
-        // 유저 검색 조회
-        const userListByEmail = await userProvider.retrieveUserList(userEmail);
-        // return res.send(response(baseResponse.SUCCESS, userListByEmail));
-        return res.send(userListByEmail);
-    }
+  if (!userEmail) {
+    // 유저 전체 조회
+    const userListResult = await userProvider.retrieveUserList();
+    // return res.send(response(baseResponse.SUCCESS, userListResult));
+    return res.send(userListResult);
+  } else {
+    // 유저 검색 조회
+    const userListByEmail = await userProvider.retrieveUserList(userEmail);
+    // return res.send(response(baseResponse.SUCCESS, userListByEmail));
+    return res.send(userListByEmail);
+  }
 };
 
 /**
@@ -81,22 +77,19 @@ exports.getUsers = async function (req, res) {
  * [GET] /app/users/{userId}
  */
 exports.getUserById = async function (req, res) {
+  /**
+   * Path Variable: userId
+   */
+  const userIdx = req.query.userIdx;
 
-    /**
-     * Path Variable: userId
-     */
-    const userIdx = req.query.userIdx;
-
-    if (!userIdx) {
-        return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
-    } else {
-        const userByUserId = await userProvider.retrieveUser(userIdx);
-        // return res.send(response(baseResponse.SUCCESS, userByUserId));
-        return res.send(userByUserId);
-    }
-
+  if (!userIdx) {
+    return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
+  } else {
+    const userByUserId = await userProvider.retrieveUser(userIdx);
+    // return res.send(response(baseResponse.SUCCESS, userByUserId));
+    return res.send(userByUserId);
+  }
 };
-
 
 // // TODO: After 로그인 인증 방법 (JWT)
 // /**
@@ -148,14 +141,12 @@ exports.getUserById = async function (req, res) {
  * API Name : 유저 삭제 API
  * [GET] /app/users/:userIdx
  */
-exports.deleteUsers = async function(req, res) {
-    const userIdx = req.query.userIdx;
+exports.deleteUsers = async function (req, res) {
+  const userIdx = req.query.userIdx;
 
-    const deleteByUserIdx = await userService.deleteUserIdx(userIdx);
-    return res.send(deleteByUserIdx);
+  const deleteByUserIdx = await userService.deleteUserIdx(userIdx);
+  return res.send(deleteByUserIdx);
 };
-
-
 
 // /** JWT 토큰 검증 API
 //  * [GET] /app/auto-login

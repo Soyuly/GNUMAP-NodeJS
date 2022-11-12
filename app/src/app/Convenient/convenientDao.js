@@ -1,6 +1,5 @@
 // 편의점 목록 조회
 async function selectConvenient(connection, category) {
-  console.log("hi");
   const selectListConvenient = `
         SELECT *
         FROM convenient
