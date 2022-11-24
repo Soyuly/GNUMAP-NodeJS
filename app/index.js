@@ -1,6 +1,18 @@
-const express = require("./config/express");
-const { logger } = require("./config/winston");
+const https = require("https");
+const http = require("http");
+const fs = require("fs");
 
-const port = 3000;
-express().listen(port);
-logger.info(`${process.env.NODE_ENV} - API Server Start At Port ${port}`);
+const express = require("./config/express");
+
+const HTTP_PORT = 8000;
+const HTTPS_PORT = 8443;
+
+app = express();
+
+const options = {
+  key: fs.readFileSync("./https/rootca.key"),
+  cert: fs.readFileSync("./https/rootca.crt"),
+};
+
+http.createServer(app).listen(HTTP_PORT);
+https.createServer(options, app).listen(HTTPS_PORT);

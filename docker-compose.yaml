@@ -4,6 +4,7 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./app:/app
       - ./config/nginx:/etc/nginx/conf.d
@@ -12,7 +13,8 @@ services:
   app:
     build: ./app
     ports:
-      - "3000:3000"
+      - "8000:8000"
+      - "8443:8443"
     volumes:
       - logs:/app/logs
       - ./app:/app
