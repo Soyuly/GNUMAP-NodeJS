@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   host: "203.255.3.66",
   port: 13306,
   user: "root",
-  password: "1234",
+  password: "5607",
   database: "gnumap",
 });
 

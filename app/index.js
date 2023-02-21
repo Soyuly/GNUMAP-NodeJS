@@ -14,5 +14,6 @@ const options = {
   cert: fs.readFileSync("./https/rootca.crt"),
 };
 
-http.createServer(app).listen(HTTP_PORT);
-https.createServer(options, app).listen(HTTPS_PORT);
+const server = http.createServer(app).listen(HTTP_PORT);
+server.keepAliveTimeout = 300 * 1000;
+server.headersTimeout = 300 * 1000;
