@@ -30,6 +30,7 @@ jobs:
             cd /home/brain/GNUMAP-NodeJS/
             git pull https://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@github.com/Soyuly/GNUMAP-NodeJS.git
             docker-compose up --build -d
+            docker ps
       - name: send slack message
         uses: 8398a7/action-slack@v3
         with:
