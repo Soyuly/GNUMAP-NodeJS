@@ -2,7 +2,6 @@ const convenientProvider = require("./convenientProvider");
 
 exports.getConvenients = async function (req, res) {
   const { curLat, curLng, category } = req.params;
-  console.log(req.params);
 
   const convenientList = await convenientProvider.retrieveConvenient(
     curLat,
@@ -14,7 +13,6 @@ exports.getConvenients = async function (req, res) {
 
 exports.getConvenientDirection = async function (req, res) {
   const { curLat, curLng, destLat, destLng } = req.params;
-  console.log(req.params);
 
   const convenientResult = await convenientProvider.retrieveConvenientDirection(
     curLat,
@@ -27,7 +25,6 @@ exports.getConvenientDirection = async function (req, res) {
 
 exports.findConvenient = async function (req, res) {
   const { curLat, curLng, destLat, destLng } = req.params;
-  console.log(`find 2도착: ${curLat} ${curLng} ${destLat} ${destLng}`);
 
   return res.render("pathInfo.html", {
     lat: curLat,

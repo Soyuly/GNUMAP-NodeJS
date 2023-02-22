@@ -1,7 +1,9 @@
 const express = require("express");
 const compression = require("compression");
 const methodOverride = require("method-override");
+const timeout = require("connect-timeout");
 var cors = require("cors");
+
 module.exports = function () {
   const app = express();
 
@@ -13,7 +15,10 @@ module.exports = function () {
 
   app.use(methodOverride());
 
+  app.use(timeout("300s"));
+
   app.use(cors());
+
   // app.use(express.static(process.cwd() + '/public'));
 
   /* App (Android, iOS) */

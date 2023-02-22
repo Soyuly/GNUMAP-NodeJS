@@ -16,9 +16,7 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
     );
     // 건물 이름에 해당하는 건물 정보가 없을 경우,
     if (!isNaN(buildingResult)) {
-      logger.error(
-        "v1 - retrieveBuilding Provider 204_NO_CONTENT error by name "
-      );
+      logger.error(`"${keyword}"에 대한 건물명이 없습니다.`);
       return response(baseResponse.BUILDING_NO_CONTENT);
     }
 
@@ -29,7 +27,7 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
   } else {
     // 빈 검색어 일 경우,
     if (isNaN(keyword)) {
-      logger.error("v1 - retrieveBuilding Provider Empty error");
+      logger.error("빈 검색어 입니다.");
       return response(baseResponse.BUILDING_EMPTY);
     }
 
@@ -41,9 +39,7 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
     connection.release();
     // 건물 번호에 해당하는 건물 정보가 없을 경우,
     if (!isNaN(buildingResult)) {
-      logger.error(
-        "v1 - retrieveBuilding Provider 204_NO_CONTENT error by num "
-      );
+      logger.error(`"${keyword}"에 대한 건물번호가 없습니다.`);
       return response(baseResponse.BUILDING_NO_CONTENT);
     }
 
