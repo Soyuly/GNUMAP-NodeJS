@@ -15,5 +15,5 @@ const options = {
 };
 
 const server = http.createServer(app).listen(HTTP_PORT);
-server.keepAliveTimeout = 300 * 1000;
-server.headersTimeout = 300 * 1000;
+// server.keepAliveTimeout = 300 * 1000;
+// server.headersTimeout = 300 * 1000;
