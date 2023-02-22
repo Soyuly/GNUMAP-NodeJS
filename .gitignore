@@ -3,7 +3,7 @@
 ./app/package-lock.json
 ./app/*.log
 ./app/*.gz
-./app/logs/
+./app/logs/*
 /env
 .idea
 .vscode
