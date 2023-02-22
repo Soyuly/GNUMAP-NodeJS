@@ -1,6 +1,5 @@
 module.exports = function (app) {
   const revise = require("./reviseController");
-  const jwtMiddleware = require("../../../config/jwtMiddleware");
 
   // 1. 슬랙 메시지 전송 API
   app.post("/v1/revise", revise.postMail);
