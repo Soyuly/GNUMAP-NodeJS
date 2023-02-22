@@ -1,4 +1,5 @@
 const convenientProvider = require("./convenientProvider");
+const { sendSlackMessage } = require("../../../config/slack");
 
 exports.getConvenients = async function (req, res) {
   const { curLat, curLng, category } = req.params;
@@ -14,13 +15,19 @@ exports.getConvenients = async function (req, res) {
 exports.getConvenientDirection = async function (req, res) {
   const { curLat, curLng, destLat, destLng } = req.params;
 
-  const convenientResult = await convenientProvider.retrieveConvenientDirection(
-    curLat,
-    curLng,
-    destLat,
-    destLng
-  );
-  return res.send(convenientResult);
+  try {
+    const convenientResult =
+      await convenientProvider.retrieveConvenientDirection(
+        curLat,
+        curLng,
+        destLat,
+        destLng
+      );
+
+    return res.send(convenientResult);
+  } catch (err) {
+    return res.send(sendSlackMessage("error", err));
+  }
 };
 
 exports.findConvenient = async function (req, res) {

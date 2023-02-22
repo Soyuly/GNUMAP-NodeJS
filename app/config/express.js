@@ -1,6 +1,7 @@
 const express = require("express");
 const compression = require("compression");
 const methodOverride = require("method-override");
+const { sendSlackMessage } = require("./slack");
 var cors = require("cors");
 
 module.exports = function () {
@@ -15,6 +16,10 @@ module.exports = function () {
   app.use(methodOverride());
 
   app.use(cors());
+
+  app.use(function (err, req, res, next) {
+    sendSlackMessage("error", err);
+  });
 
   // app.use(express.static(process.cwd() + '/public'));
 
