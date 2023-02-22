@@ -18,7 +18,7 @@ services:
       - "8000:8000"
       - "8443:8443"
     volumes:
-      - logs:/app/logs
+      - ./app/logs:/app/logs
       - ./app:/app
       - /app/node_modules
     env_file:
