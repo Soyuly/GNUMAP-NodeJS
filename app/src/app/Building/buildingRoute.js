@@ -3,9 +3,9 @@ module.exports = function (app) {
   const { render, name } = require("ejs");
   // 1. 검색한 building 경로 (소요 시간, 거리) 조회 API
 
-  function haltOnTimedout(req, res, next) {
-    if (!req.timedout) next();
-  }
+  // function haltOnTimedout(req, res, next) {
+  //   if (!req.timedout) next();
+  // }
 
   // view 경로 설정
   app.set("views", __dirname + "/../../views");

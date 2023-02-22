@@ -14,7 +14,6 @@
   "dependencies": {
     "@slack/web-api": "^6.8.0",
     "compression": "^1.7.4",
-    "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "ejs": "^3.1.8",
