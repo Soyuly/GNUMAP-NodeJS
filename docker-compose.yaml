@@ -10,13 +10,51 @@ services:
       - ./app:/app
       - ./config/nginx:/etc/nginx/conf.d
     depends_on:
-      - app
-  app:
+      - gnumap
+      - gnumap1
+      - gnumap2
+      - gnumap3
+  gnumap:
     container_name: gnumap
     build: ./app
     ports:
       - "8000:8000"
-      - "8443:8443"
+    volumes:
+      - ./app/logs:/app/logs
+      - ./app:/app
+      - /app/node_modules
+    env_file:
+      - ./env/db.env
+      - ./env/slack.env
+  gnumap1:
+    container_name: gnumap1
+    build: ./app
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./app/logs:/app/logs
+      - ./app:/app
+      - /app/node_modules
+    env_file:
+      - ./env/db.env
+      - ./env/slack.env
+  gnumap2:
+    container_name: gnumap2
+    build: ./app
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./app/logs:/app/logs
+      - ./app:/app
+      - /app/node_modules
+    env_file:
+      - ./env/db.env
+      - ./env/slack.env
+  gnumap3:
+    container_name: gnumap3
+    build: ./app
+    ports:
+      - "8003:8000"
     volumes:
       - ./app/logs:/app/logs
       - ./app:/app
