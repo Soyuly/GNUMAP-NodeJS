@@ -9,6 +9,7 @@ exports.getConvenients = async function (req, res) {
     curLng,
     category
   );
+  console.log("확인");
   return res.send(convenientList);
 };
 
