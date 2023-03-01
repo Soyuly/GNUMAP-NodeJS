@@ -14,14 +14,15 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
       connection,
       keyword
     );
+    connection.release();
+
     // 건물 이름에 해당하는 건물 정보가 없을 경우,
     if (!isNaN(buildingResult)) {
       logger.error(`"${keyword}"에 대한 건물명이 없습니다.`);
       return response(baseResponse.BUILDING_NO_CONTENT);
     }
-
     addDistanceAndTime(buildingResult, curLat, curLng);
-    connection.release();
+
 
     return buildingResult;
   } else {
@@ -37,6 +38,7 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
       keyword
     );
     connection.release();
+
     // 건물 번호에 해당하는 건물 정보가 없을 경우,
     if (!isNaN(buildingResult)) {
       logger.error(`"${keyword}"에 대한 건물번호가 없습니다.`);
