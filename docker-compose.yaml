@@ -13,6 +13,8 @@ services:
       - gnumap1
       - gnumap2
       - gnumap3
+      - gnumap4
+      - gnumap5
   gnumap:
     container_name: gnumap
     build: ./app
@@ -54,6 +56,30 @@ services:
     build: ./app
     ports:
       - "8003:8000"
+    volumes:
+      - ./app/logs:/app/logs
+      - ./app:/app
+      - /app/node_modules
+    env_file:
+      - ./env/db.env
+      - ./env/slack.env
+  gnumap4:
+    container_name: gnumap4
+    build: ./app
+    ports:
+      - "8004:8000"
+    volumes:
+      - ./app/logs:/app/logs
+      - ./app:/app
+      - /app/node_modules
+    env_file:
+      - ./env/db.env
+      - ./env/slack.env
+  gnumap5:
+    container_name: gnumap5
+    build: ./app
+    ports:
+      - "8005:8000"
     volumes:
       - ./app/logs:/app/logs
       - ./app:/app
