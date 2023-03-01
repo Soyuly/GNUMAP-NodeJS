@@ -14,6 +14,7 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
       connection,
       keyword
     );
+
     connection.release();
 
     // 건물 이름에 해당하는 건물 정보가 없을 경우,
@@ -22,7 +23,6 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
       return response(baseResponse.BUILDING_NO_CONTENT);
     }
     addDistanceAndTime(buildingResult, curLat, curLng);
-
 
     return buildingResult;
   } else {
