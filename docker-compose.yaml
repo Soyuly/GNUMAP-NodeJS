@@ -53,7 +53,7 @@ services:
     env_file:
       - ./env/db.env
       - ./env/slack.env
-      - ./env/tmap_gentle.env
+      - ./env/tmap_seyoung.env
   gnumap3:
     container_name: gnumap3
     build: ./app
@@ -66,7 +66,7 @@ services:
     env_file:
       - ./env/db.env
       - ./env/slack.env
-      - ./env/tmap_soyul.env
+      - ./env/tmap_gentle.env
   gnumap4:
     container_name: gnumap4
     build: ./app
@@ -79,7 +79,7 @@ services:
     env_file:
       - ./env/db.env
       - ./env/slack.env
-      - ./env/tmap_gentle.env
+      - ./env/tmap_soyul.env
   gnumap5:
     container_name: gnumap5
     build: ./app
@@ -92,6 +92,6 @@ services:
     env_file:
       - ./env/db.env
       - ./env/slack.env
-      - ./env/tmap_soyul.env
+      - ./env/tmap_seyoung.env
 volumes:
   logs:
