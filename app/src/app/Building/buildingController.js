@@ -59,11 +59,13 @@ exports.searchBuilding = async function (req, res) {
 
 exports.showBuildingPath = async (req, res) => {
   const { curLat, curLng, destLat, destLng } = req.params;
+  const secretKey = process.env.TMAP_SECRET_KEY;
   data = {
     curLat: curLat,
     curLng: curLng,
     destLat: destLat,
     destLng: destLng,
+    secretKey: secretKey,
   };
   const { distance, time } = getDistanceAndTime(
     curLat,
