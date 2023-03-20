@@ -7,12 +7,19 @@ const { logger } = require("../../../config/winston");
 const buildingDao = require("./buildingDao");
 
 // Provider: Read 비즈니스 로직 처리
-exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
+exports.retrieveBuildingByNameOrNum = async function (
+  keyword,
+  area,
+  curLat,
+  curLng
+) {
   if (typeof keyword == "string") {
     const connection = await pool.getConnection(async (conn) => conn);
+
     const buildingResult = await buildingDao.selectBuildingByName(
       connection,
-      keyword
+      keyword,
+      area
     );
 
     connection.release();
@@ -35,7 +42,9 @@ exports.retrieveBuildingByNameOrNum = async function (keyword, curLat, curLng) {
     const connection = await pool.getConnection(async (conn) => conn);
     const buildingResult = await buildingDao.selectBuildingByNum(
       connection,
-      keyword
+      keyword,
+      area
+      // area
     );
     connection.release();
 

@@ -15,6 +15,10 @@ module.exports = function (app) {
 
   app.get("/v1/building/:curLat/:curLng/:keyword", building.searchBuilding);
   app.get(
+    "/v1/building/:curLat/:curLng/:keyword/:area/",
+    building.searchBuilding
+  );
+  app.get(
     "/v1/path/:curLat/:curLng/:destLat/:destLng",
     building.showBuildingPath
   );

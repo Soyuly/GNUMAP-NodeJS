@@ -10,6 +10,7 @@ const {
   addDistanceAndTime,
   getDistanceAndTime,
 } = require("../../../config/directions");
+const { logger } = require("../../../config/winston");
 
 /**
  * API No. 0
@@ -19,11 +20,14 @@ const {
 
 exports.searchBuilding = async function (req, res) {
   const { curLat, curLng } = req.params;
-  let { keyword } = req.params;
+  let { keyword, area } = req.params;
   const regexInt = /[^0-9]/g; // [숫자 추출] 정규 표현식
   const regexEmpty = /^\s+|\s+$/gm; // [공백 제거] 정규 표현식
   const num = keyword.replace(regexInt, "");
   keyword = keyword.replace(regexEmpty, "");
+  if (!area) {
+    area = "가좌";
+  }
 
   // 건물 번호나 동을 포함한 검색어를 입력하였을 경우,
   if (num == keyword || keyword.includes("동")) {
@@ -34,6 +38,7 @@ exports.searchBuilding = async function (req, res) {
   if (typeof keyword == "string") {
     const buildingResult = await buildingProvider.retrieveBuildingByNameOrNum(
       keyword,
+      area,
       curLat,
       curLng
     );
@@ -44,6 +49,7 @@ exports.searchBuilding = async function (req, res) {
   else {
     const buildingResult = await buildingProvider.retrieveBuildingByNameOrNum(
       keyword,
+      area,
       curLat,
       curLng
     );

@@ -8,16 +8,17 @@ async function selectBuilding(connection) {
   return buildingRows;
 }
 
-async function selectBuildingByName(connection, name) {
-  const query = "%" + name + "%";
+async function selectBuildingByName(connection, name, area) {
+  const name_query = "%" + name + "%";
   const selectBuildingByNameQuery = `
     SELECT *
     FROM building
-    WHERE ( name LIKE ? OR category LIKE ? );
+    WHERE ( (name LIKE ? OR category LIKE ?) AND area = ?);
     `;
   const [buildingRows] = await connection.query(selectBuildingByNameQuery, [
-    query,
-    query,
+    name_query,
+    name_query,
+    area,
   ]);
   return buildingRows;
 }
@@ -26,9 +27,13 @@ async function selectBuildingByNum(connection, num) {
   const selectBuildingByNumQuery = `
       SELECT *
       FROM building
-      WHERE num = ?;
+      WHERE ( num = ? AND area = ? );
       `;
-  const [buildingRows] = await connection.query(selectBuildingByNumQuery, num);
+  const [buildingRows] = await connection.query(
+    selectBuildingByNumQuery,
+    num,
+    area
+  );
   return buildingRows;
 }
 
