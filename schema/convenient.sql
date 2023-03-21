@@ -1,3 +1,15 @@
+create table gnumap.convenient
+(
+    name     varchar(30)     not null,
+    phone    varchar(15)     not null,
+    lat      decimal(25, 20) not null,
+    lng      decimal(25, 20) not null,
+    open     varchar(15)     not null,
+    close    varchar(15)     not null,
+    category varchar(10)     not null
+);
+
+
 insert into gnumap.convenient (name, phone, lat, lng, open, close, category) values ('GS25 기숙사후문점', '055-755-7536', 35.15843464000000000000, 128.10050330000000000000, '06:00', '1:00', '편의점');
 insert into gnumap.convenient (name, phone, lat, lng, open, close, category) values ('CU 생활관점', '055-772-0946', 35.15839175000000000000, 128.09976740000000000000, '00:00', '23:59', '편의점');
 insert into gnumap.convenient (name, phone, lat, lng, open, close, category) values ('GS25 생활관점', '070-4006-0018', 35.15665597935926000000, 128.10183470775894000000, '08:00', '24:00', '편의점');

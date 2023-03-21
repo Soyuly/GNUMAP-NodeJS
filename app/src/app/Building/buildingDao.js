@@ -15,6 +15,7 @@ async function selectBuildingByName(connection, name, area) {
     FROM building
     WHERE ( (name LIKE ? OR category LIKE ?) AND area = ?);
     `;
+
   const [buildingRows] = await connection.query(selectBuildingByNameQuery, [
     name_query,
     name_query,
@@ -23,17 +24,16 @@ async function selectBuildingByName(connection, name, area) {
   return buildingRows;
 }
 
-async function selectBuildingByNum(connection, num) {
+async function selectBuildingByNum(connection, num, area) {
   const selectBuildingByNumQuery = `
       SELECT *
       FROM building
-      WHERE ( num = ? AND area = ? );
+      WHERE num = ? AND area = ?;
       `;
-  const [buildingRows] = await connection.query(
-    selectBuildingByNumQuery,
+  const [buildingRows] = await connection.query(selectBuildingByNumQuery, [
     num,
-    area
-  );
+    area,
+  ]);
   return buildingRows;
 }
 
